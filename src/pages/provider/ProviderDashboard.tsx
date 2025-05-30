@@ -24,3 +24,5 @@ const ProviderDashboard = () => {
     </div>
   );
 };
+
+export default ProviderDashboard;
