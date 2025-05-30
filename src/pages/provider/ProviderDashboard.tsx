@@ -117,13 +117,14 @@ const ProviderDashboard: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
-            <Card>
-              <h3 className="text-sm font-medium text-gray-500">{stat.name}</h3>
-              <p className="mt-2 text-3xl font-bold text-gray-900">{stat.value}</p>
-              <p className={`mt-1 text-sm ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                {stat.change}
-              </p>
-            </Card>
+          <Card className="bg-white/80 backdrop-blur-lg border border-gray-200 shadow-xl rounded-2xl p-6 hover:shadow-2xl transition duration-300 ease-in-out">
+  <h3 className="text-sm font-medium text-gray-500">{stat.name}</h3>
+  <p className="mt-2 text-4xl font-semibold text-gray-900 tracking-tight">{stat.value}</p>
+  <p className={`mt-1 text-sm ${stat.trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
+    {stat.change}
+  </p>
+</Card>
+
           </motion.div>
         ))}
       </div>
