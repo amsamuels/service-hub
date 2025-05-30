@@ -1,6 +1,6 @@
 // src/pages/provider/ProviderOnboarding.tsx
 import React, { useState } from 'react';
-import motion from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const steps = ['Business Info', 'Services', 'Payments'];
 
