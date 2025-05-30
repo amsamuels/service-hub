@@ -299,7 +299,7 @@ const LandingPage: React.FC = () => {
                 {faqs.map((faq, index) => (
                   <Accordion.Item
                     key={index}
-                    value={item-${index}}
+                    value={`item-${index}`}
                     className="rounded-lg bg-white px-6 py-4"
                   >
                     <Accordion.Header>
@@ -472,4 +472,4 @@ const LandingPage: React.FC = () => {
   );
 };
 
-export default LandingPage;"
+export default LandingPage;
