@@ -62,7 +62,7 @@ const ProviderLayout: React.FC = () => {
                   to={item.href}
                   className={({ isActive }) =>
                     cn(
-                      'group flex items-center px-4 py-3 text-sm font-medium rounded-mdtransition-colors duration-150',
+                      'group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors duration-150',
                       isActive
                         ? 'bg-secondary text-text'
                         : 'text-gray-600 hover:bg-beige hover:text-text'
