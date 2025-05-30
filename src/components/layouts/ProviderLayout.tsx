@@ -62,7 +62,7 @@ const ProviderLayout: React.FC = () => {
                   to={item.href}
                   className={({ isActive }) =>
                     cn(
-                      'group flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors duration-150',
+                      'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150',
                       isActive
                         ? 'bg-secondary text-text'
                         : 'text-gray-600 hover:bg-beige hover:text-text'
@@ -83,7 +83,7 @@ const ProviderLayout: React.FC = () => {
             <div className="border-t border-gray-200 p-4">
               <NavLink
                 to="/auth/login"
-                className="group flex items-center px-4 py-3 text-sm font-medium rounded-md w-full text-gray-600 hover:bg-beige hover:text-text"
+                className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-beige hover:text-text"
               >
                 <LogOut
                   className="mr-3 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
@@ -110,7 +110,7 @@ const ProviderLayout: React.FC = () => {
                   to={item.href}
                   className={({ isActive }) =>
                     cn(
-                      'group flex items-center px-4 py-3 text-sm font-medium rounded-md w-full transition-colors duration-150',
+                      'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150',
                       isActive
                         ? 'bg-secondary text-text'
                         : 'text-gray-600 hover:bg-beige hover:text-text'
@@ -131,7 +131,7 @@ const ProviderLayout: React.FC = () => {
             <div className="border-t border-gray-200 p-4">
               <NavLink
                 to="/auth/login"
-                className="group flex items-center px-4 py-3 text-sm font-medium rounded-md w-full text-gray-600 hover:bg-beige hover:text-text"
+                className="group flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-beige hover:text-text"
               >
                 <LogOut
                   className="mr-3 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
