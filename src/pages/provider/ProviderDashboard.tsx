@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { PlusCircle, Store, BarChart } from 'lucide-react';
 
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
@@ -28,7 +29,6 @@ ChartJS.register(
 );
 
 const ProviderDashboard: React.FC = () => {
-  // --- Mock Data ---
   const stats = [
     { name: 'Total Subscribers', value: '42', change: '+8%', trend: 'up' },
     { name: 'Monthly Revenue', value: '$3,240', change: '+12%', trend: 'up' },
@@ -107,8 +107,12 @@ const ProviderDashboard: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8">
-      {/* Stats Grid */}
+    <div className="space-y-10 max-w-screen-xl mx-auto px-6 py-12">
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900">Welcome back, Jamie 👋</h1>
+        <p className="text-gray-500 mt-1">Here’s what’s happening in your salon this week.</p>
+      </div>
+
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => (
           <motion.div
@@ -117,104 +121,58 @@ const ProviderDashboard: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
-          <Card className="bg-white/80 backdrop-blur-lg border border-gray-200 shadow-xl rounded-2xl p-6 hover:shadow-2xl transition duration-300 ease-in-out">
-  <h3 className="text-sm font-medium text-gray-500">{stat.name}</h3>
-  <p className="mt-2 text-4xl font-semibold text-gray-900 tracking-tight">{stat.value}</p>
-  <p className={`mt-1 text-sm ${stat.trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
-    {stat.change}
-  </p>
-</Card>
-
+            <Card className="bg-white/80 backdrop-blur-md border border-gray-200 shadow-md hover:shadow-xl transition rounded-2xl p-6">
+              <h3 className="text-sm text-gray-500 font-medium">{stat.name}</h3>
+              <p className="text-3xl font-semibold text-gray-900 mt-2">{stat.value}</p>
+              <p className={`mt-1 text-sm ${stat.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>{stat.change}</p>
+            </Card>
           </motion.div>
         ))}
       </div>
 
-      {/* Charts Section */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Card title="Revenue Overview">
-            <div className="h-64">
-              <Line data={revenueData} options={chartOptions} />
-            </div>
-          </Card>
-        </motion.div>
+        <Card className="rounded-2xl p-6 bg-gradient-to-tr from-white to-gray-50 border border-gray-200 shadow-lg">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">Revenue Overview</h2>
+          <div className="h-64">
+            <Line data={revenueData} options={chartOptions} />
+          </div>
+        </Card>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.2 }}
-        >
-          <Card title="Recent Customers">
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead>
-                  <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {recentCustomers.map((customer) => (
-                    <tr key={customer.id}>
-                      <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {customer.name}
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {customer.subscription}
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {customer.date}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Card>
-        </motion.div>
+        <Card title="Recent Customers">
+          <div className="grid sm:grid-cols-2 gap-4">
+            {recentCustomers.map(customer => (
+              <div key={customer.id} className="bg-white rounded-xl shadow-sm p-4 border hover:shadow-md transition">
+                <div className="text-lg font-semibold text-gray-800">{customer.name}</div>
+                <p className="text-sm text-gray-500">{customer.subscription} plan</p>
+                <p className="text-sm text-gray-400">{customer.date}</p>
+                <p className="text-sm font-bold text-primary-600 mt-1">{customer.amount}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
       </div>
 
-      {/* Appointments + Actions */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.4 }}
-        >
-          <Card title="Upcoming Appointments">
-            <ul className="divide-y divide-gray-200">
-              {upcomingAppointments.map((appt) => (
-                <li key={appt.id} className="py-4">
-                  <div className="flex items-center justify-between">
-                    <div className="font-medium">{appt.customer}</div>
-                    <span className="text-sm text-gray-500">{appt.time}</span>
-                  </div>
-                  <div className="text-sm text-gray-500">{appt.service}</div>
-                  <div className="mt-1 text-xs text-primary-600 font-semibold">{appt.date}</div>
-                </li>
-              ))}
-            </ul>
-          </Card>
-        </motion.div>
+        <Card title="Upcoming Appointments">
+          <ul className="relative border-l border-gray-200 pl-4">
+            {upcomingAppointments.map(appt => (
+              <li key={appt.id} className="mb-6 ml-4">
+                <div className="absolute w-3 h-3 bg-primary-600 rounded-full -left-1.5 top-1.5"></div>
+                <h4 className="text-md font-semibold">{appt.customer}</h4>
+                <p className="text-sm text-gray-500">{appt.service}</p>
+                <p className="text-xs text-primary-500 font-medium mt-1">{appt.date} – {appt.time}</p>
+              </li>
+            ))}
+          </ul>
+        </Card>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.6 }}
-        >
-          <Card title="Quick Actions">
-            <div className="grid grid-cols-1 gap-4">
-              <Button variant="primary" fullWidth>Create Subscription Plan</Button>
-              <Button variant="secondary" fullWidth>Manage Storefront</Button>
-              <Button variant="outline" fullWidth>View Analytics</Button>
-            </div>
-          </Card>
-        </motion.div>
+        <Card title="Quick Actions">
+          <div className="grid grid-cols-1 gap-4">
+            <Button variant="primary" fullWidth icon={<PlusCircle className="mr-2" />}>Create Subscription Plan</Button>
+            <Button variant="secondary" fullWidth icon={<Store className="mr-2" />}>Manage Storefront</Button>
+            <Button variant="outline" fullWidth icon={<BarChart className="mr-2" />}>View Analytics</Button>
+          </div>
+        </Card>
       </div>
     </div>
   );
